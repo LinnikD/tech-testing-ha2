@@ -72,7 +72,7 @@ class MainForm(Component):
 
 
 class Age(Component):
-    def choose_age(self, offset):
+    def choose_age(self, left_offset, right_offset):
         el = WebDriverWait(self.driver, 30, 0.5).until(
             lambda d: d.find_element_by_css_selector(CreateEl.AGE_GROUP)
         )
@@ -80,11 +80,18 @@ class Age(Component):
             lambda e: e.find_element_by_css_selector(CreateEl.AGE)
         )
         age_el.click()
-        left = WebDriverWait(self.driver, 30, 0.1).until(
-            lambda d: d.find_element_by_css_selector(CreateEl.LEFT_SLIDER)
-        )
-        ac = ActionChains(self.driver)
-        ac.click_and_hold(left).move_by_offset(offset, 0).release().perform()
+        if left_offset > 0:
+            left = WebDriverWait(self.driver, 30, 0.1).until(
+                lambda d: d.find_element_by_css_selector(CreateEl.LEFT_SLIDER)
+            )
+            ac = ActionChains(self.driver)
+            ac.click_and_hold(left).move_by_offset(left_offset, 0).release().perform()
+        if right_offset > 0:
+            right = WebDriverWait(self.driver, 30, 0.1).until(
+                lambda d: d.find_element_by_css_selector(CreateEl.RIGHT_SLIDER)
+            )
+            ac = ActionChains(self.driver)
+            ac.click_and_hold(right).move_by_offset(-right_offset, 0).release().perform()
 
     def get_age(self):
         el = WebDriverWait(self.driver, 30, 0.5).until(

@@ -14,5 +14,7 @@ class BannerData(object):
     TEXT = 'TEXT TEXT TEXT TEXT TEXT'
     URL = 'www.superurl.com'
     PICTURE = os.getcwd() + '/tests/res/kotik.jpg'
-    AGE = {'offset': 50, 'value': u'18 лет и старше'}
+    AGE_LEFT = {'offset': 50, 'value': u'18 лет и старше'}
+    AGE_RIGHT = {'offset': 100, 'value': u'до 62 лет'}
+    AGE_LEFT_AND_RIGHT = {'l_offset': 100, 'r_offset': 200, 'value': u'от 25 до 50 лет'}
     RESTRICT = '12+'

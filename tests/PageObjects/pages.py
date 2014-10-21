@@ -1,8 +1,8 @@
 import urlparse
 from components import \
-    AuthForm,\
-    TopMenu, CampaignName,  AgeRestrictions, MainForm, Age, SubmitButton,\
-    Name, ActionBar,\
+    AuthForm, \
+    TopMenu, CampaignName,  AgeRestrictions, MainForm, Age, SubmitButton, \
+    Name, ActionBar, \
     Banner
 
 

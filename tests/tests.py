@@ -109,12 +109,12 @@ class Tests(unittest.TestCase):
 
         delete_campaign(self.driver)
 
-    def test_age(self):
+    def test_age_min(self):
         login(self.driver)
 
         create_simple_campaign(self.driver)
         create_page = CreatePage(self.driver)
-        create_page.age.choose_age(BannerData.AGE['offset'])
+        create_page.age.choose_age(BannerData.AGE_LEFT['offset'], 0)
 
         submit(self.driver)
 
@@ -124,8 +124,50 @@ class Tests(unittest.TestCase):
 
         edit_page = EditPage(self.driver)
         age = edit_page.age.get_age()
-        self.assertEquals(BannerData.AGE['value'], age)
+        self.assertEquals(BannerData.AGE_LEFT['value'], age)
 
         delete_campaign(self.driver)
+
+    def test_age_min_and_max(self):
+        login(self.driver)
+
+        create_simple_campaign(self.driver)
+        create_page = CreatePage(self.driver)
+        create_page.age.choose_age(
+            BannerData.AGE_LEFT_AND_RIGHT['l_offset'],
+            BannerData.AGE_LEFT_AND_RIGHT['r_offset'])
+
+        submit(self.driver)
+
+        campaign_page = CampaignPage(self.driver)
+        campaign_page.open()
+        campaign_page.action_bar.edit()
+
+        edit_page = EditPage(self.driver)
+        age = edit_page.age.get_age()
+        self.assertEquals(BannerData.AGE_LEFT_AND_RIGHT['value'], age)
+
+        delete_campaign(self.driver)
+
+    def test_age_max(self):
+        login(self.driver)
+
+        create_simple_campaign(self.driver)
+        create_page = CreatePage(self.driver)
+        create_page.age.choose_age(0, BannerData.AGE_RIGHT['offset'])
+
+        submit(self.driver)
+
+        campaign_page = CampaignPage(self.driver)
+        campaign_page.open()
+        campaign_page.action_bar.edit()
+
+        edit_page = EditPage(self.driver)
+        age = edit_page.age.get_age()
+        self.assertEquals(BannerData.AGE_RIGHT['value'], age)
+
+        delete_campaign(self.driver)
+
+
 
 
